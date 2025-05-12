@@ -823,7 +823,128 @@
     animation-fill-mode: forwards;
 }
 
+/* Additional animation keyframes for scrolling effects */
+@keyframes slideInUp {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
 
+@keyframes slideInLeftDelayed {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRightDelayed {
+    0% {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Section animations */
+.section-animated {
+    opacity: 0;
+}
+
+/* Welcome section animations */
+.welcome-title {
+    animation: slideInUp 1s ease-out forwards;
+    animation-play-state: paused;
+}
+
+.title-underline {
+    animation: fadeIn 1s ease-out 0.3s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+.welcome-description {
+    animation: slideInUp 1s ease-out 0.5s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+.video-container {
+    animation: fadeIn 1.2s ease-out 0.7s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+/* Entertainment section animations */
+.entertainment-info {
+    animation: slideInLeftDelayed 1s ease-out forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+.statistics-graphic {
+    animation: slideInRightDelayed 1s ease-out 0.3s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+/* Attractions section animations */
+.attractions-image {
+    animation: fadeIn 1.2s ease-out forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+/* Contact section animations */
+.contact-title {
+    animation: slideInUp 1s ease-out forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+.contact-intro {
+    animation: fadeIn 1s ease-out 0.3s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+.contact-left {
+    animation: slideInLeftDelayed 1s ease-out 0.5s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+.contact-right {
+    animation: slideInRightDelayed 1s ease-out 0.5s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+/* Animation play state class - applied by JavaScript */
+.animate-start {
+    animation-play-state: running !important;
+}
 
 
     </style>
@@ -1083,6 +1204,55 @@
                    console.error('JavaScript error:', error);
                }
            });
+
+
+           const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.2
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Only animate once
+        }
+    });
+}, observerOptions);
+
+// Add 'animate-on-scroll' class to elements you want to animate
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.welcome-title, .welcome-description, .video-container, .entertainment-info, .statistics-graphic').forEach(el => {
+        el.classList.add('animate-on-scroll');
+        observer.observe(el);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Animation trigger on scroll
+    const animatedElements = document.querySelectorAll('.welcome-title, .title-underline, .welcome-description, .video-container, .entertainment-info, .statistics-graphic, .attractions-image, .contact-title, .contact-intro, .contact-left, .contact-right');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-start');
+                observer.unobserve(entry.target); // Only animate once
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.2 // 20% visibility triggers animation
+    });
+    
+    // Observe all animated elements
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+});
+
+
        </script>
    </body>
 </html>
