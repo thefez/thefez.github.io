@@ -573,32 +573,25 @@
             justify-content: space-between;
         }
         
-       .nav-menu {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        right: 0;
-        width: 100%;
-        background-color: #b93d3d;
-        flex-direction: column;
-        align-items: center;
-        height: 0;
-        overflow: hidden;
-        transition: height 0.3s ease;
-        z-index: 1000;
-        border-top: 1px solid rgba(255,255,255,0.1);
-    }
+        .nav-menu {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            flex-direction: column;
+            width: 100%;
+            background-color: #b93d3d;
+            gap: 0;
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s ease;
+        }
         
         .nav-menu.active {
-        height: auto;
-        max-height: calc(100vh - 60px);
-        padding: 10px 0;
-        overflow-y: auto;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-          body.menu-open {
-        overflow: hidden;
-    }
+            height: auto;
+            padding: 10px 0;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
         .nav-item {
             margin: 0;
             width: 100%;
@@ -611,11 +604,9 @@
             font-size: 16px;
         }
         
-         .mobile-toggle {
-        display: block;
-        position: relative;
-        z-index: 1001;
-    }
+        .mobile-toggle {
+            display: block;
+        }
         
         /* Hero section responsive */
         .hero-heading {
@@ -752,6 +743,89 @@
         color: white;
         text-decoration: underline;
     }
+
+/* Animation keyframes */
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes typingEffect {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blinkCaret {
+    from, to { border-color: transparent }
+    50% { border-color: white }
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Animation for overlay sliding in from left */
+.color-overlay {
+    animation: slideInLeft 1.2s ease-out forwards;
+}
+
+/* Animation for logo scaling up */
+.fez-logo {
+    animation: scaleIn 1.5s ease-out 0.5s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+/* Animation for text content sliding in from right */
+.hero-right {
+    animation: slideInRight 1.2s ease-out 0.2s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+/* Animation for buttons fading in */
+.hero-buttons {
+    animation: fadeIn 1s ease-in 1.5s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+
+
+
     </style>
 </head>
 <body>
@@ -759,25 +833,26 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- New Header Section -->
-   <header class="header" role="banner">
-    <div class="nav-container">
-        <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false" type="button">
-    <span class="sr-only">Menu</span>
-    ☰
-</button>
-        <nav role="navigation" aria-label="Main navigation">
-            <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item"><a href="#hero" class="nav-link">HOME</a></li>
-                <li class="nav-item"><a href="#welcome" class="nav-link">ABOUT</a></li>
-                <li class="nav-item"><a href="#attractions" class="nav-link">ATTRACTIONS</a></li>
-                <li class="nav-item"><a href="#vision" class="nav-link">VISION</a></li>
-                <li class="nav-item"><a href="#gallery" class="nav-link">GALLERY</a></li>
-                <li class="nav-item"><a href="#investment" class="nav-link">INVESTMENT</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">CONTACT</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+    <header class="header" role="banner">
+        <div class="nav-container">
+            <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="sr-only">Menu</span>
+                ☰
+            </button>
+            <nav role="navigation" aria-label="Main navigation">
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#hero" class="nav-link">HOME</a></li>
+                    <li class="nav-item"><a href="#welcome" class="nav-link">ABOUT</a></li>
+                    <li class="nav-item"><a href="#attractions" class="nav-link">ATTRACTIONS</a></li>
+                    <li class="nav-item"><a href="#vision" class="nav-link">VISION</a></li>
+                    <li class="nav-item"><a href="#gallery" class="nav-link">GALLERY</a></li>
+                    <li class="nav-item"><a href="#investment" class="nav-link">INVESTMENT</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <main id="main-content">
         <!-- Hero image section with overlay -->
         <section id="hero" class="hero-image">
@@ -796,7 +871,10 @@
                 
                 <!-- Right column with text and buttons -->
                 <div class="hero-right">
-                    <h1 class="hero-heading">Manteca's Premier Destination for Shopping, Dining & Entertainment</h1>
+                    <h1 class="hero-heading">
+                        <span class="typing-animation">Manteca's Premier Destination</span>
+                        <span>for Shopping, Dining & Entertainment</span>
+                    </h1>
                     
                     <div class="hero-buttons">
                         <a href="#attractions" class="hero-button white-button">EXPLORE FEATURES</a>
@@ -929,61 +1007,66 @@
         </section>
     </main>
 
-    
-   
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">Accessibility Statement</a>
+            </div>
+            <p class="copyright">© 2025 The FEZ Manteca - All Rights Reserved</p>
+        </div>
+    </footer>
 
-   <!-- JavaScript -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        try {
-            // Mobile navigation toggle
-          const mobileToggle = document.querySelector('.mobile-toggle');
-const navMenu = document.querySelector('.nav-menu');
+    <!-- Cookie Consent -->
+    <div id="cookie-consent" class="cookie-consent">
+        <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+        <button onclick="acceptCookies()">Accept</button>
+        <a href="#" id="privacy-link">Learn More</a>
+    </div>
 
-if (mobileToggle && navMenu) {
-    // Direct click handler
-    mobileToggle.onclick = function() {
-        navMenu.classList.toggle('active');
-        this.setAttribute('aria-expanded', navMenu.classList.contains('active'));
-        document.body.classList.toggle('menu-open', navMenu.classList.contains('active'));
-    };
-    
-    // Close menu when clicking links
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.onclick = function() {
-            navMenu.classList.remove('active');
-            mobileToggle.setAttribute('aria-expanded', 'false');
-            document.body.classList.remove('menu-open');
-        };
-    });
-}
-            
-            // Active link highlighting
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            window.addEventListener('scroll', function() {
-                let current = '';
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Mobile navigation toggle
+                const mobileToggle = document.querySelector('.mobile-toggle');
+                const navMenu = document.querySelector('.nav-menu');
                 
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if(window.pageYOffset >= (sectionTop - 150)) {
-                        current = section.getAttribute('id');
-                    }
-                });
+                if (mobileToggle && navMenu) {
+                    mobileToggle.addEventListener('click', function() {
+                        navMenu.classList.toggle('active');
+                        // Update ARIA attribute
+                        const isExpanded = navMenu.classList.contains('active');
+                        mobileToggle.setAttribute('aria-expanded', isExpanded);
+                    });
+                }
+
+                // Active link highlighting
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-link');
                 
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if(link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
+                window.addEventListener('scroll', function() {
+                    let current = '';
+                    
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        const sectionHeight = section.clientHeight;
+                        if(window.pageYOffset >= (sectionTop - 150)) {
+                            current = section.getAttribute('id');
+                        }
+                    });
+                    
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if(link.getAttribute('href') === `#${current}`) {
+                            link.classList.add('active');
+                        }
+                    });
                 });
-            });
-            
-            // Cookie consent handling (if needed)
-            const cookieConsent = document.getElementById('cookie-consent');
-            if (cookieConsent) {
+
+                // Cookie consent
+                const cookieConsent = document.getElementById('cookie-consent');
                 const hasAcceptedCookies = localStorage.getItem('cookiesAccepted');
                 
                 if (!hasAcceptedCookies) {
@@ -991,22 +1074,15 @@ if (mobileToggle && navMenu) {
                         cookieConsent.classList.add('active');
                     }, 1000);
                 }
-                
+
                 window.acceptCookies = function() {
                     localStorage.setItem('cookiesAccepted', 'true');
                     cookieConsent.classList.remove('active');
                 };
-            }
-            
-            // Fix for iOS touch events on mobile menu
-            if ('ontouchstart' in window) {
-                document.body.classList.add('touch-device');
-            }
-            
-        } catch (error) {
-            console.error('JavaScript error:', error);
-        }
-    });
-</script>
+            } catch (error) {
+                   console.error('JavaScript error:', error);
+               }
+           });
+       </script>
    </body>
 </html>
