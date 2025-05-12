@@ -701,48 +701,7 @@
         }
     }
 
-    /* Cookie consent */
-    .cookie-consent {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.9);
-        color: white;
-        padding: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 15px;
-        z-index: 1000;
-        transform: translateY(100%);
-        transition: transform 0.3s ease;
-    }
-
-    .cookie-consent.active {
-        transform: translateY(0);
-    }
-
-    .cookie-consent p {
-        margin: 0;
-        font-size: 14px;
-    }
-
-    .cookie-consent button {
-        background: #b93d3d;
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
-    .cookie-consent a {
-        color: white;
-        text-decoration: underline;
-    }
+ 
     </style>
 </head>
 <body>
@@ -932,13 +891,7 @@
         </div>
     </footer>
 
-    <!-- Cookie Consent -->
-    <div id="cookie-consent" class="cookie-consent">
-        <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
-        <button onclick="acceptCookies()">Accept</button>
-        <a href="#" id="privacy-link">Learn More</a>
-    </div>
-
+    
     <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -979,24 +932,7 @@
                     });
                 });
 
-                // Cookie consent
-                const cookieConsent = document.getElementById('cookie-consent');
-                const hasAcceptedCookies = localStorage.getItem('cookiesAccepted');
-                
-                if (!hasAcceptedCookies) {
-                    setTimeout(() => {
-                        cookieConsent.classList.add('active');
-                    }, 1000);
-                }
-
-                window.acceptCookies = function() {
-                    localStorage.setItem('cookiesAccepted', 'true');
-                    cookieConsent.classList.remove('active');
-                };
-            } catch (error) {
-                   console.error('JavaScript error:', error);
-               }
-           });
+             
        </script>
    </body>
 </html>
