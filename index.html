@@ -573,25 +573,32 @@
             justify-content: space-between;
         }
         
-        .nav-menu {
-            position: absolute;
-            top: 60px;
-            left: 0;
-            flex-direction: column;
-            width: 100%;
-            background-color: #b93d3d;
-            gap: 0;
-            height: 0;
-            overflow: hidden;
-            transition: height 0.3s ease;
-        }
+       .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: #b93d3d;
+        flex-direction: column;
+        align-items: center;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s ease;
+        z-index: 1000;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
         
         .nav-menu.active {
-            height: auto;
-            padding: 10px 0;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-        }
-        
+        height: auto;
+        max-height: calc(100vh - 60px);
+        padding: 10px 0;
+        overflow-y: auto;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+          body.menu-open {
+        overflow: hidden;
+    }
         .nav-item {
             margin: 0;
             width: 100%;
@@ -604,9 +611,11 @@
             font-size: 16px;
         }
         
-        .mobile-toggle {
-            display: block;
-        }
+         .mobile-toggle {
+        display: block;
+        position: relative;
+        z-index: 1001;
+    }
         
         /* Hero section responsive */
         .hero-heading {
@@ -752,10 +761,10 @@
     <!-- New Header Section -->
    <header class="header" role="banner">
     <div class="nav-container">
-        <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
-            <span class="sr-only">Menu</span>
-            ☰
-        </button>
+        <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false" type="button">
+    <span class="sr-only">Menu</span>
+    ☰
+</button>
         <nav role="navigation" aria-label="Main navigation">
             <ul class="nav-menu" id="nav-menu">
                 <li class="nav-item"><a href="#hero" class="nav-link">HOME</a></li>
@@ -928,42 +937,26 @@
     document.addEventListener('DOMContentLoaded', function() {
         try {
             // Mobile navigation toggle
-            const mobileToggle = document.querySelector('.mobile-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            
-            if (mobileToggle && navMenu) {
-                mobileToggle.addEventListener('click', function() {
-                    navMenu.classList.toggle('active');
-                    
-                    // Update ARIA attribute
-                    const isExpanded = navMenu.classList.contains('active');
-                    mobileToggle.setAttribute('aria-expanded', isExpanded);
-                    
-                    // Toggle body class for preventing scroll when menu is open
-                    document.body.classList.toggle('menu-open', navMenu.classList.contains('active'));
-                });
-                
-                // Close menu when clicking a link
-                const navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        navMenu.classList.remove('active');
-                        mobileToggle.setAttribute('aria-expanded', 'false');
-                        document.body.classList.remove('menu-open');
-                    });
-                });
-                
-                // Close menu when clicking outside
-                document.addEventListener('click', function(event) {
-                    if (navMenu.classList.contains('active') && 
-                        !navMenu.contains(event.target) && 
-                        !mobileToggle.contains(event.target)) {
-                        navMenu.classList.remove('active');
-                        mobileToggle.setAttribute('aria-expanded', 'false');
-                        document.body.classList.remove('menu-open');
-                    }
-                });
-            }
+          const mobileToggle = document.querySelector('.mobile-toggle');
+const navMenu = document.querySelector('.nav-menu');
+
+if (mobileToggle && navMenu) {
+    // Direct click handler
+    mobileToggle.onclick = function() {
+        navMenu.classList.toggle('active');
+        this.setAttribute('aria-expanded', navMenu.classList.contains('active'));
+        document.body.classList.toggle('menu-open', navMenu.classList.contains('active'));
+    };
+    
+    // Close menu when clicking links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.onclick = function() {
+            navMenu.classList.remove('active');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('menu-open');
+        };
+    });
+}
             
             // Active link highlighting
             const sections = document.querySelectorAll('section[id]');
