@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="The FEZ Manteca is a premier entertainment destination featuring shopping, dining, and family entertainment in the Central Valley of California.">
+    <meta name="keywords" content="FEZ Manteca, family entertainment, shopping center, dining, Central Valley, California">
+    <meta name="author" content="City of Manteca">
+    <title>The FEZ - Manteca's Family Entertainment Zone</title>
+    
+    <!-- Preloaded fonts for performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    
+    <!-- Structured data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EntertainmentBusiness",
+      "name": "The FEZ Manteca",
+      "description": "Manteca's premier destination for shopping, dining & entertainment",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1215 W CENTER ST",
+        "addressLocality": "Manteca",
+        "addressRegion": "CA",
+        "postalCode": "95336"
+      },
+      "telephone": "+12094568030",
+      "email": "econdev@manteca.gov"
+    }
+    </script>
+    
+    <style>
+    /* Reset and base styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+        color: #333;
+    }
+
+    /* Accessibility additions */
+    .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #b93d3d;
+        color: white;
+        padding: 8px;
+        z-index: 1001;
+        transition: top 0.3s;
+    }
+
+    .skip-link:focus {
+        top: 0;
+    }
+
+    *:focus {
+        outline: 2px solid #b93d3d;
+        outline-offset: 2px;
+    }
+
+    /* =====================
+       HEADER STYLING
+    ===================== */
+    .header {
+        background-color: #b93d3d;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: flex-end;
+        padding: 15px 20px;
+    }
+
+    .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+    }
+
+    .nav-item {
+        margin: 0;
+    }
+
+    .nav-link {
+        color: white;
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: 800;
+        text-transform: uppercase;
+        transition: opacity 0.3s ease;
+    }
+
+    .nav-link:hover {
+        opacity: 0.8;
+    }
+
+    .nav-link.active {
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    /* Mobile toggle button */
+    .mobile-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+
+    /* =====================
+       HERO SECTION
+    ===================== */
+    .hero-image {
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 60px);
+        min-height: 550px;
+        overflow: hidden;
+    }
+
+    /* Image and overlay container */
+    .image-overlay-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .full-width-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .color-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(185, 61, 61, 0.4);
+        mix-blend-mode: multiply;
+    }
+
+    /* Content container */
+    .hero-content-container {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        height: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* Left side with logo */
+    .hero-left {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-right: 20px;
+    }
+
+    .fez-logo {
+        max-width: 100%;
+        max-height: 80%;
+        width: auto;
+        height: auto;
+    }
+
+    /* Right side with text and buttons */
+    .hero-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+        padding-left: 20px;
+    }
+
+    .hero-heading {
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 40px;
+    }
+
+    /* Buttons styling */
+    .hero-buttons {
+        display: flex;
+        gap: 20px;
+    }
+
+    .hero-button {
+        display: inline-block;
+        padding: 15px 30px;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .white-button {
+        background-color: white;
+        color: #b93d3d;
+    }
+
+    .white-button:hover {
+        background-color: #f5f5f5;
+        transform: translateY(-2px);
+    }
+
+    .outline-button {
+        background-color: transparent;
+        color: white;
+        border: 2px solid white;
+    }
+
+    .outline-button:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+    }
+
+    /* =====================
+       WELCOME SECTION
+    ===================== */
+    .welcome-section {
+        background-color: #f9f9f9;
+        padding: 70px 20px;
+        width: 100%;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .welcome-title {
+        text-align: center;
+        font-size: 60px;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        letter-spacing: 2px;
+        color: #000;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    .title-underline {
+        height: 4px;
+        width: 220px;
+        background-color: #b93d3d;
+        margin: 0 auto 40px;
+    }
+
+    .welcome-description {
+        max-width: 1080px;
+        margin: 0 auto 40px;
+        text-align: center;
+        font-size: 24px;
+        line-height: 1.6;
+        color: #333;
+        font-weight: 600;
+    }
+
+    .video-container {
+        position: relative;
+        width: 60%;
+        max-width: 672px;
+        margin: 0 auto;
+        overflow: hidden;
+        padding-top: 33.75%;
+    }
+
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    /* =====================
+       ENTERTAINMENT DESTINATION SECTION
+    ===================== */
+    .entertainment-section {
+        background-color: #f5f5f5;
+        padding: 80px 20px;
+        width: 100%;
+    }
+
+    .entertainment-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Left side - Text content image */
+    .entertainment-info {
+        flex: 1;
+        min-width: 300px;
+        max-width: 600px;
+    }
+
+    .info-image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* Right side - Statistics graphic */
+    .statistics-graphic {
+        flex: 1;
+        min-width: 300px;
+        max-width: 600px;
+    }
+
+    .stats-image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* =====================
+       WORLD CLASS ATTRACTIONS SECTION
+    ===================== */
+    .attractions-section {
+        width: 100%;
+        padding: 0;
+        background: linear-gradient(to bottom, #f5f5f5, #fff);
+    }
+
+    .attractions-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* =====================
+       INVESTMENT SECTION
+    ===================== */
+    .investment-section {
+        width: 100%;
+        padding: 0;
+        background: linear-gradient(to bottom, #f5f5f5, #fff);
+    }
+
+    .investment-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* =====================
+       CONTACT SECTION
+    ===================== */
+    .contact-section {
+        background-color: #b93d3d;
+        padding: 50px 0;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .contact-section .container {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .contact-section img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .contact-title, .contact-intro {
+        text-align: center;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+
+    .contact-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .contact-left, .contact-right {
+        flex: 1;
+        min-width: 280px;
+    }
+
+    .connect-title {
+        margin-bottom: 20px;
+    }
+
+    .social-icons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .social-icon {
+        transition: opacity 0.3s;
+    }
+
+    .social-icon:hover {
+        opacity: 0.8;
+    }
+
+    .contact-info {
+        display: grid;
+        gap: 25px;
+    }
+
+    .contact-button {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        display: inline-block;
+        transition: opacity 0.2s;
+    }
+
+    .contact-button:hover {
+        opacity: 0.9;
+    }
+
+    /* =====================
+       FOOTER SECTION
+    ===================== */
+    .footer {
+        background-color: #222;
+        color: white;
+        padding: 30px 0;
+        width: 100%;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .footer-link {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        transition: opacity 0.3s;
+    }
+
+    .footer-link:hover {
+        opacity: 0.8;
+    }
+
+    .copyright {
+        font-size: 14px;
+        opacity: 0.8;
+    }
+
+    /* =====================
+       RESPONSIVE STYLES
+    ===================== */
+    @media (max-width: 992px) {
+        /* Hero section responsive */
+        .hero-content-container {
+            flex-direction: column;
+        }
+        
+        .hero-left, .hero-right {
+            flex: none;
+            width: 100%;
+            padding: 20px 0;
+        }
+        
+        .hero-heading {
+            font-size: 36px;
+            text-align: center;
+        }
+        
+        .hero-buttons {
+            justify-content: center;
+        }
+        
+        /* Welcome section responsive */
+        .welcome-title {
+            font-size: 48px;
+        }
+        
+        .welcome-description {
+            font-size: 22px;
+            padding: 0 20px;
+        }
+        
+        .video-container {
+            width: 80%;
+            padding-top: 45%;
+        }
+        
+        /* Entertainment section responsive */
+        .entertainment-content {
+            flex-direction: column;
+        }
+        
+        .entertainment-info,
+        .statistics-graphic {
+            width: 100%;
+            max-width: 700px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        /* Navigation responsive */
+        .nav-container {
+            justify-content: space-between;
+        }
+        
+        .nav-menu {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            flex-direction: column;
+            width: 100%;
+            background-color: #b93d3d;
+            gap: 0;
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s ease;
+        }
+        
+        .nav-menu.active {
+            height: auto;
+            padding: 10px 0;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-item {
+            margin: 0;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 15px;
+            font-size: 16px;
+        }
+        
+        .mobile-toggle {
+            display: block;
+        }
+        
+        /* Hero section responsive */
+        .hero-heading {
+            font-size: 28px;
+        }
+        
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .hero-button {
+            width: 100%;
+            max-width: 280px;
+        }
+        
+        /* Welcome section responsive */
+        .welcome-title {
+            font-size: 36px;
+        }
+        
+        .welcome-description {
+            font-size: 18px;
+        }
+        
+        .video-container {
+            width: 100%;
+            padding-top: 56.25%;
+        }
+        
+        /* Entertainment section responsive */
+        .entertainment-section {
+            padding: 60px 20px;
+        }
+        
+        /* Attractions section responsive */
+        .attractions-section {
+            padding: 0;
+        }
+        
+        /* Investment section responsive */
+        .investment-section {
+            padding: 0;
+        }
+        
+        /* Contact section responsive */
+        .contact-section {
+            padding: 40px 0;
+        }
+        
+        .contact-section .container {
+            padding: 0 15px;
+        }
+        
+        .contact-content {
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .contact-left, .contact-right {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .contact-info {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .contact-info img {
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .social-icons {
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Footer responsive */
+        .footer-content {
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+
+    /* Cookie consent */
+    .cookie-consent {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        z-index: 1000;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+    }
+
+    .cookie-consent.active {
+        transform: translateY(0);
+    }
+
+    .cookie-consent p {
+        margin: 0;
+        font-size: 14px;
+    }
+
+    .cookie-consent button {
+        background: #b93d3d;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .cookie-consent a {
+        color: white;
+        text-decoration: underline;
+    }
+    </style>
+</head>
+<body>
+    <!-- Skip to content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- New Header Section -->
+    <header class="header" role="banner">
+        <div class="nav-container">
+            <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="sr-only">Menu</span>
+                ☰
+            </button>
+            <nav role="navigation" aria-label="Main navigation">
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#hero" class="nav-link">HOME</a></li>
+                    <li class="nav-item"><a href="#welcome" class="nav-link">ABOUT</a></li>
+                    <li class="nav-item"><a href="#attractions" class="nav-link">ATTRACTIONS</a></li>
+                    <li class="nav-item"><a href="#vision" class="nav-link">VISION</a></li>
+                    <li class="nav-item"><a href="#gallery" class="nav-link">GALLERY</a></li>
+                    <li class="nav-item"><a href="#investment" class="nav-link">INVESTMENT</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero image section with overlay -->
+        <section id="hero" class="hero-image">
+            <!-- Background image with overlay -->
+            <div class="image-overlay-container">
+                <img src="img/section1BG.png" alt="The FEZ Development aerial view" class="full-width-image" width="1920" height="1080">
+                <div class="color-overlay" aria-hidden="true"></div>
+            </div>
+            
+            <!-- Content container -->
+            <div class="hero-content-container">
+                <!-- Left column with logo -->
+                <div class="hero-left">
+                    <img src="img/thefez.png" alt="THE FEZ - Family Entertainment Zone logo" class="fez-logo" width="600" height="400">
+                </div>
+                
+                <!-- Right column with text and buttons -->
+                <div class="hero-right">
+                    <h1 class="hero-heading">Manteca's Premier Destination for Shopping, Dining & Entertainment</h1>
+                    
+                    <div class="hero-buttons">
+                        <a href="#attractions" class="hero-button white-button">EXPLORE FEATURES</a>
+                        <a href="#investment" class="hero-button outline-button">INVESTMENT OPPORTUNITY</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="welcome" class="welcome-section">
+            <div class="container">
+                <!-- Section title -->
+                <h2 class="welcome-title">WELCOME TO THE FEZ</h2>
+                
+                <!-- Red underline -->
+                <div class="title-underline" aria-hidden="true"></div>
+                
+                <!-- Description text -->
+                <p class="welcome-description">
+                    The Family Entertainment Zone (FEZ) is Manteca's visionary development project designed to create a premier destination for residents and visitors alike.
+                </p>
+                
+                <!-- YouTube video embed -->
+                <div class="video-container">
+                    <iframe width="1120" height="630" src="https://www.youtube.com/embed/xxdtJeF1AtQ" title="The FEZ - Manteca's Family Entertainment Zone" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="entertainment-section">
+            <div class="container">
+                <div class="entertainment-content">
+                    <!-- Left side: Text content image -->
+                    <div class="entertainment-info">
+                        <img src="img/entertainment.png" alt="A Comprehensive Entertainment Destination - FEZ Manteca represents a unique opportunity to develop a mixed-use entertainment district as a regional draw for the Central Valley" class="info-image" width="600" height="450" loading="lazy">
+                    </div>
+                    
+                    <!-- Right side: Statistics graphic -->
+                    <div class="statistics-graphic">
+                        <img src="img/table.png" alt="FEZ Statistics: 120+ Acres of Development, 1M+ Annual Visitors Expected, 500+ Jobs Created, $100M+ Economic Impact" class="stats-image" width="600" height="450" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="attractions" class="attractions-section">
+            <div class="container">
+                <img src="img/worldclass.png" alt="World Class Attractions at The FEZ Manteca - Premium Shopping, Diverse Dining, Family Entertainment, Sports Facilities, Live Entertainment, and Community Spaces with 120+ acres, 50+ retail spaces, 25+ dining options, and 10+ entertainment venues" class="attractions-image" width="1200" height="900" loading="lazy">
+            </div>
+        </section>
+
+        <section id="vision" class="attractions-section">
+            <div class="container">
+                <img src="img/vision.png" alt="Our Vision for The FEZ Manteca - A transformative project that will redefine entertainment in the Central Valley" class="attractions-image" width="1200" height="900" loading="lazy">
+            </div>
+        </section>
+
+        <section id="gallery" class="attractions-section">
+            <div class="container">
+                <img src="img/project.png" alt="Project Gallery - Conceptual renderings of the FEZ Manteca development" class="attractions-image" width="1200" height="900" loading="lazy">
+            </div>
+        </section>
+
+        <section id="investment" class="investment-section">
+            <div class="container">
+                <img src="img/investment.png" alt="Investment Opportunities at The FEZ Manteca - Prime location with excellent visibility and accessibility" class="attractions-image" width="1200" height="900" loading="lazy">
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <!-- Main title image -->
+                <div class="contact-title">
+                    <img src="img/contact_us_title.png" alt="CONTACT US" width="300" height="80">
+                </div>
+                
+                <!-- Intro text with email button -->
+                <div class="contact-intro">
+                    <!-- Combined intro text with email reference -->
+                    <img src="img/contact_intro_text.png" alt="Do you have a question about anything at The FEZ, including specs, investment opportunity or ideas?" width="800" height="100">
+                </div>
+                
+                <!-- Two-column layout -->
+                <div class="contact-content">
+                    <!-- Left column -->
+                    <div class="contact-left">
+                        <!-- Let's Connect title -->
+                        <div class="connect-title">
+                            <img src="img/lets_connect_title.png" alt="LET'S CONNECT" width="300" height="60">
+                        </div>
+                        
+                        <!-- Social media icons -->
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="Instagram">
+                                <img src="img/instagram_icon.png" alt="" aria-hidden="true" width="50" height="50">
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Facebook">
+                                <img src="img/facebook_icon.png" alt="" aria-hidden="true" width="50" height="50">
+                            </a>
+                            <a href="#" class="social-icon" aria-label="LinkedIn">
+                                <img src="img/linkedin_icon.png" alt="" aria-hidden="true" width="50" height="50">
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Website">
+                                <img src="img/www_icon.png" alt="" aria-hidden="true" width="50" height="50">
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Right column -->
+                    <div class="contact-right">
+                        <div class="contact-info">
+                            <!-- Email Address (combined label and value as one image) -->
+                            <a href="mailto:econdev@manteca.gov" class="contact-button" aria-label="Email: econdev@manteca.gov">
+                                <img src="img/email_address_combined.png" alt="" aria-hidden="true" width="400" height="60">
+                            </a>
+                            
+                            <!-- Mailing Address (combined label and value as one image) -->
+                            <div aria-label="Mailing Address: 1215 West Center Street, Manteca, California 95336">
+                                <img src="img/mailing_address_combined.png" alt="" aria-hidden="true" width="400" height="60">
+                            </div>
+                            
+                            <!-- Phone Number (combined label and value as one image) -->
+                            <a href="tel:2094568030" class="contact-button" aria-label="Phone: 209-456-8030">
+                                <img src="img/phone_number_combined.png" alt="" aria-hidden="true" width="400" height="60">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">Accessibility Statement</a>
+            </div>
+            <p class="copyright">© 2025 The FEZ Manteca - All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookie-consent" class="cookie-consent">
+        <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+        <button onclick="acceptCookies()">Accept</button>
+        <a href="#" id="privacy-link">Learn More</a>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Mobile navigation toggle
+                const mobileToggle = document.querySelector('.mobile-toggle');
+                const navMenu = document.querySelector('.nav-menu');
+                
+                if (mobileToggle && navMenu) {
+                    mobileToggle.addEventListener('click', function() {
+                        navMenu.classList.toggle('active');
+                        // Update ARIA attribute
+                        const isExpanded = navMenu.classList.contains('active');
+                        mobileToggle.setAttribute('aria-expanded', isExpanded);
+                    });
+                }
+
+                // Active link highlighting
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                window.addEventListener('scroll', function() {
+                    let current = '';
+                    
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        const sectionHeight = section.clientHeight;
+                        if(window.pageYOffset >= (sectionTop - 150)) {
+                            current = section.getAttribute('id');
+                        }
+                    });
+                    
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if(link.getAttribute('href') === `#${current}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                });
+
+                // Cookie consent
+                const cookieConsent = document.getElementById('cookie-consent');
+                const hasAcceptedCookies = localStorage.getItem('cookiesAccepted');
+                
+                if (!hasAcceptedCookies) {
+                    setTimeout(() => {
+                        cookieConsent.classList.add('active');
+                    }, 1000);
+                }
+
+                window.acceptCookies = function() {
+                    localStorage.setItem('cookiesAccepted', 'true');
+                    cookieConsent.classList.remove('active');
+                };
+            } catch (error) {
+                   console.error('JavaScript error:', error);
+               }
+           });
+       </script>
+   </body>
+</html>
