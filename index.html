@@ -36,6 +36,158 @@
     </script>
     
     <style>
+
+/* Modal/Lightbox for the enlarged map */
+.map-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-modal.active {
+    display: flex;
+}
+
+.map-modal-content {
+    position: relative;
+    max-width: 95%;
+    max-height: 95%;
+}
+
+.enlarged-map {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border: 4px solid white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.close-map-modal {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px 10px;
+}
+
+.close-map-modal:hover {
+    color: #b93d3d;
+}
+
+/* Make sure the vision section container has position relative */
+#vision .container {
+    position: relative;
+}
+
+/* Clickable map area overlay - specifically for vision section */
+#vision .map-overlay {
+    position: absolute;
+    /* Adjusted size (reduced by 20%) and position (moved left) */
+    bottom: 5%;
+    right: 8%;     /* Moved left by increasing right value */
+    width: 34%;     /* Reduced by about 20% from 35% */
+    height: 32%;    /* Reduced by about 20% from 28% */
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    z-index: 10;
+    
+    /* More transparent debug styling */
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+#vision .map-overlay:hover {
+    border: 2px solid rgba(185, 61, 61, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#vision .map-overlay:after {
+    content: '🔍 Click to enlarge map';
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.5); /* More transparent background */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#vision .map-overlay:hover:after {
+    opacity: 0.8; /* More transparent text on hover */
+}
+
+/* Mobile responsive styles */
+@media (max-width: 992px) {
+    #vision .map-overlay {
+        /* Reduced width (15% less than original) and moved left */
+        width: 34%; /* Was 40%, reduced by 15% */
+        height: 35%; /* Was 30%, reduced by ~15% */
+        right: 8%; /* Moved more to the left */
+    }
+    
+    #vision .map-overlay:after {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    #vision .map-overlay {
+        /* Adjusted as requested for mobile */
+        width: 34%; /* Was 50%, reduced by 20% */
+        height: 33%; /* Was 35%, reduced by 20% */
+        bottom: 5%;
+        right: 8%; /* Moved more to the left */
+        border: 2px solid rgba(185, 61, 61, 0.3); /* More transparent border */
+    }
+    
+    #vision .map-overlay:after {
+        opacity: 0.7; /* More transparent */
+        font-size: 12px;
+        padding: 5px 8px;
+        bottom: 5px;
+        right: 5px;
+    }
+    
+    .close-map-modal {
+        font-size: 36px;
+        padding: 10px 15px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    #vision .map-overlay {
+        /* 30% width for small screens as requested */
+        width: 33%;
+        height: 32%;
+        right: 9%; /* Moved much more to the left */
+    }
+    
+    #vision .map-overlay:after {
+        content: '🔍 Enlarge';
+        opacity: 0.6; /* More transparent */
+    }
+}
+
+
+
     /* Reset and base styles */
     * {
         margin: 0;
@@ -701,49 +853,7 @@
         }
     }
 
-    /* Cookie consent */
-    .cookie-consent {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.9);
-        color: white;
-        padding: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 15px;
-        z-index: 1000;
-        transform: translateY(100%);
-        transition: transform 0.3s ease;
-    }
-
-    .cookie-consent.active {
-        transform: translateY(0);
-    }
-
-    .cookie-consent p {
-        margin: 0;
-        font-size: 14px;
-    }
-
-    .cookie-consent button {
-        background: #b93d3d;
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
-    .cookie-consent a {
-        color: white;
-        text-decoration: underline;
-    }
-
+ 
 /* Animation keyframes */
 @keyframes slideInLeft {
     0% {
@@ -1048,11 +1158,11 @@
         </section>
 
         <section id="vision" class="attractions-section">
-            <div class="container">
+            <div class="container" style="position: relative;">
                 <img src="img/vision.png" alt="Our Vision for The FEZ Manteca - A transformative project that will redefine entertainment in the Central Valley" class="attractions-image" width="1200" height="900" loading="lazy">
+                <div id="map-clickable-area" class="map-overlay" aria-label="Click to see enlarged map"></div>
             </div>
         </section>
-
         <section id="gallery" class="attractions-section">
             <div class="container">
                 <img src="img/project.png" alt="Project Gallery - Conceptual renderings of the FEZ Manteca development" class="attractions-image" width="1200" height="900" loading="lazy">
@@ -1128,85 +1238,57 @@
         </section>
     </main>
 
-    <footer class="footer" role="contentinfo">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#" class="footer-link">Privacy Policy</a>
-                <a href="#" class="footer-link">Terms of Service</a>
-                <a href="#" class="footer-link">Accessibility Statement</a>
-            </div>
-            <p class="copyright">© 2025 The FEZ Manteca - All Rights Reserved</p>
-        </div>
-    </footer>
+    
 
-    <!-- Cookie Consent -->
-    <div id="cookie-consent" class="cookie-consent">
-        <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
-        <button onclick="acceptCookies()">Accept</button>
-        <a href="#" id="privacy-link">Learn More</a>
-    </div>
+   
 
     <!-- JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            try {
-                // Mobile navigation toggle
-                const mobileToggle = document.querySelector('.mobile-toggle');
-                const navMenu = document.querySelector('.nav-menu');
-                
-                if (mobileToggle && navMenu) {
-                    mobileToggle.addEventListener('click', function() {
-                        navMenu.classList.toggle('active');
-                        // Update ARIA attribute
-                        const isExpanded = navMenu.classList.contains('active');
-                        mobileToggle.setAttribute('aria-expanded', isExpanded);
-                    });
+      document.addEventListener('DOMContentLoaded', function() {
+    try {
+        // Mobile navigation toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (mobileToggle && navMenu) {
+            mobileToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                // Update ARIA attribute
+                const isExpanded = navMenu.classList.contains('active');
+                mobileToggle.setAttribute('aria-expanded', isExpanded);
+            });
+        }
+
+        // Active link highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if(window.pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
                 }
-
-                // Active link highlighting
-                const sections = document.querySelectorAll('section[id]');
-                const navLinks = document.querySelectorAll('.nav-link');
-                
-                window.addEventListener('scroll', function() {
-                    let current = '';
-                    
-                    sections.forEach(section => {
-                        const sectionTop = section.offsetTop;
-                        const sectionHeight = section.clientHeight;
-                        if(window.pageYOffset >= (sectionTop - 150)) {
-                            current = section.getAttribute('id');
-                        }
-                    });
-                    
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if(link.getAttribute('href') === `#${current}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                });
-
-                // Cookie consent
-                const cookieConsent = document.getElementById('cookie-consent');
-                const hasAcceptedCookies = localStorage.getItem('cookiesAccepted');
-                
-                if (!hasAcceptedCookies) {
-                    setTimeout(() => {
-                        cookieConsent.classList.add('active');
-                    }, 1000);
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
                 }
+            });
+        });
 
-                window.acceptCookies = function() {
-                    localStorage.setItem('cookiesAccepted', 'true');
-                    cookieConsent.classList.remove('active');
-                };
-            } catch (error) {
-                   console.error('JavaScript error:', error);
-               }
-           });
+    } catch (error) {
+           console.error('JavaScript error:', error);
+       }
+   });
 
 
-           const observerOptions = {
+const observerOptions = {
     root: null,
     rootMargin: '0px',
     threshold: 0.2
@@ -1251,8 +1333,54 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 });
-
-
+document.addEventListener('DOMContentLoaded', function() {
+    // Setup for map modal/lightbox
+    const mapClickableArea = document.getElementById('map-clickable-area');
+    const mapModal = document.getElementById('map-modal');
+    const closeMapModal = document.querySelector('.close-map-modal');
+    
+    // Check if elements exist to prevent errors
+    if (mapClickableArea && mapModal) {
+        // Open modal when map area is clicked
+        mapClickableArea.addEventListener('click', function() {
+            mapModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        });
+        
+        // Close modal when X button is clicked
+        if (closeMapModal) {
+            closeMapModal.addEventListener('click', function() {
+                mapModal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+        }
+        
+        // Close modal when clicking outside the image
+        mapModal.addEventListener('click', function(event) {
+            if (event.target === mapModal) {
+                mapModal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && mapModal.classList.contains('active')) {
+                mapModal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+    }
+});
        </script>
+
+
+<div id="map-modal" class="map-modal" role="dialog" aria-labelledby="map-modal-title" aria-modal="true">
+    <div class="map-modal-content">
+        <button class="close-map-modal" aria-label="Close enlarged map view">&times;</button>
+        <img id="enlarged-map" class="enlarged-map" src="img/map_large.png" alt="Enlarged view of the FEZ Manteca conceptual plan map" />
+    </div>
+</div>
+
    </body>
 </html>
