@@ -115,15 +115,25 @@ body {
 
 .pdf-header {
     background-color: white;
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
 .pdf-notice {
     color: #666;
-    font-size: 1.1rem;
-    margin-top: 0.5rem;
+    font-size: 1rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0;
+}
+
+.top-download-section {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
 }
 
 .pdf-container {
@@ -150,14 +160,14 @@ body {
     background-color: #666;
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
+    padding: 0.8rem 1.5rem;
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
     transition: background-color 0.3s ease;
-    margin-left: 1rem;
+    margin-left: 0;
 }
 
 .fullscreen-btn:hover {
@@ -257,7 +267,13 @@ body {
     }
 
     .pdf-header {
-        padding: 1rem;
+        padding: 1rem 1rem 0.75rem 1rem;
+    }
+
+    .top-download-section {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
     }
 
     .pdf-container {
@@ -333,6 +349,16 @@ body {
         <div class="pdf-header">
             <h1 class="page-title">Request for Qualifications</h1>
             <p class="pdf-notice">View the complete RFQ document below or download the PDF for offline access.</p>
+            
+            <!-- Download Link at Top -->
+            <div class="top-download-section">
+                <a href="https://drive.google.com/file/d/1g8vz47mczDI6SjM8FHDqd1L2gqQDTrm0/view" target="_blank" class="download-link">
+                    📄 View/Download Complete RFQ (65 pages)
+                </a>
+                <button onclick="openFullscreen()" class="fullscreen-btn">
+                    🔍 View Fullscreen
+                </button>
+            </div>
         </div>
         
         <div class="pdf-container">
@@ -414,6 +440,3 @@ body {
 </body>
 </html>
 
-    </script>
-</body>
-</html>
