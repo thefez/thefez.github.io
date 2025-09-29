@@ -156,22 +156,24 @@ body {
     background: white;
 }
 
-.fullscreen-btn {
+.learn-more-btn {
     background-color: #666;
     color: white;
-    border: none;
+    display: inline-block;
     padding: 0.8rem 1.5rem;
     border-radius: 6px;
-    cursor: pointer;
     font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
     margin-left: 0;
 }
 
-.fullscreen-btn:hover {
+.learn-more-btn:hover {
     background-color: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 102, 102, 0.3);
 }
 
 .contact-footer {
@@ -285,11 +287,6 @@ body {
         padding: 0.75rem 1rem;
     }
 
-    .fullscreen-btn {
-        margin-left: 0;
-        margin-top: 0.5rem;
-    }
-
     .contact-info {
         font-size: 0.85rem;
         line-height: 1.4;
@@ -347,11 +344,11 @@ body {
             <!-- Download Link at Top -->
             <div class="top-download-section">
                 <a href="https://drive.google.com/file/d/1g8vz47mczDI6SjM8FHDqd1L2gqQDTrm0/view" target="_blank" class="download-link">
-                    📄 View/Download Complete RFQ 
+                    📄 View/Download Complete RFQ
                 </a>
-                <button onclick="openFullscreen()" class="fullscreen-btn">
-                    🔍 View Fullscreen
-                </button>
+                <a href="https://hunden.com/developer-rfq-the-family-entertainment-zone/" target="_blank" class="learn-more-btn">
+                    � Learn More
+                </a>
             </div>
         </div>
         
@@ -388,17 +385,7 @@ body {
             });
         });
 
-        // Fullscreen PDF viewer functionality
-        function openFullscreen() {
-            const iframe = document.querySelector('.pdf-viewer');
-            if (iframe.requestFullscreen) {
-                iframe.requestFullscreen();
-            } else if (iframe.webkitRequestFullscreen) { /* Safari */
-                iframe.webkitRequestFullscreen();
-            } else if (iframe.msRequestFullscreen) { /* IE11 */
-                iframe.msRequestFullscreen();
-            }
-        }
+        // PDF viewer is now streamlined without fullscreen functionality
 
         // Handle PDF loading errors
         document.addEventListener('DOMContentLoaded', function() {
@@ -416,7 +403,7 @@ body {
                         <h3 style="color: #b93d3d; margin-bottom: 1rem;">PDF Preview Not Available</h3>
                         <p style="margin-bottom: 2rem; color: #666;">Unable to display the PDF preview. Please view the document directly on Google Drive.</p>
                         <a href="https://drive.google.com/file/d/1g8vz47mczDI6SjM8FHDqd1L2gqQDTrm0/view" target="_blank" class="download-link" style="display: inline-block; background: #b93d3d; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 6px;">
-                            📄 View Complete RFQ on Google Drive (65 pages)
+                            📄 View Complete RFQ on Google Drive
                         </a>
                     </div>
                 `;
@@ -425,4 +412,5 @@ body {
     </script>
 </body>
 </html>
+
 
