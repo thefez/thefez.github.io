@@ -336,11 +336,12 @@ body {
         </div>
         
         <div class="pdf-container">
-            <iframe src="FEZ_Sep2025_RFQ-DRAFT.pdf" 
+            <iframe src="https://drive.google.com/file/d/1g8vz47mczDI6SjM8FHDqd1L2gqQDTrm0/preview" 
                     class="pdf-viewer"
                     title="FEZ RFQ Document - September 2025 Draft"
-                    loading="lazy">
-                <p>Your browser does not support PDF viewing. Please <a href="FEZ_Sep2025_RFQ-DRAFT.pdf" download>download the PDF</a> to view it.</p>
+                    loading="lazy"
+                    allow="autoplay">
+                <p>Your browser does not support PDF viewing. Please <a href="https://drive.google.com/file/d/1g8vz47mczDI6SjM8FHDqd1L2gqQDTrm0/view" target="_blank">view the PDF on Google Drive</a>.</p>
             </iframe>
         </div>
 
@@ -351,8 +352,8 @@ body {
                 <a href="https://manteca.gov" target="_blank">Manteca.gov</a>
             </div>
             <div class="download-links">
-                <a href="FEZ_Sep2025_RFQ-DRAFT.pdf" download class="download-link">
-                    📄 Download Complete RFQ (65 pages)
+                <a href="https://drive.google.com/file/d/1g8vz47mczDI6SjM8FHDqd1L2gqQDTrm0/view" target="_blank" class="download-link">
+                    📄 View/Download Complete RFQ (65 pages)
                 </a>
                 <button onclick="openFullscreen()" class="fullscreen-btn">
                     🔍 View Fullscreen
@@ -396,19 +397,23 @@ body {
             });
             
             iframe.addEventListener('error', function() {
-                // PDF failed to load, show download link instead
+                // PDF failed to load, show Google Drive link instead
                 const container = iframe.parentElement;
                 container.innerHTML = `
                     <div style="text-align: center; padding: 3rem; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                         <h3 style="color: #b93d3d; margin-bottom: 1rem;">PDF Preview Not Available</h3>
-                        <p style="margin-bottom: 2rem; color: #666;">Unable to display the PDF in your browser. Please download the document to view it.</p>
-                        <a href="FEZ_Sep2025_RFQ-DRAFT.pdf" download class="download-link" style="display: inline-block; background: #b93d3d; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 6px;">
-                            📄 Download Complete RFQ (65 pages)
+                        <p style="margin-bottom: 2rem; color: #666;">Unable to display the PDF preview. Please view the document directly on Google Drive.</p>
+                        <a href="https://drive.google.com/file/d/1g8vz47mczDI6SjM8FHDqd1L2gqQDTrm0/view" target="_blank" class="download-link" style="display: inline-block; background: #b93d3d; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 6px;">
+                            📄 View Complete RFQ on Google Drive (65 pages)
                         </a>
                     </div>
                 `;
             });
         });
+    </script>
+</body>
+</html>
+
     </script>
 </body>
 </html>
