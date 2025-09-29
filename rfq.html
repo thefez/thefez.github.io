@@ -136,45 +136,43 @@ body {
     flex-wrap: wrap;
 }
 
-.pdf-container {
+.image-container {
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 1rem;
+    align-items: flex-start;
+    padding: 2rem;
     background-color: #f8f9fa;
-}
-
-.pdf-viewer {
-    width: 100%;
-    max-width: 1000px;
-    height: 80vh;
     min-height: 600px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.rfq-image-link {
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.rfq-image-link:hover {
+    transform: scale(1.02);
+}
+
+.rfq-image {
+    max-width: 800px;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     background: white;
+    padding: 1rem;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
 }
 
-.learn-more-btn {
-    background-color: #b93d3d;
-    color: white;
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    margin-left: 0;
+.rfq-image:hover {
+    box-shadow: 0 12px 32px rgba(0,0,0,0.2);
 }
 
-.learn-more-btn:hover {
-    background-color: #a03333;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(185, 61, 61, 0.3);
-}
+
 
 .contact-footer {
     background-color: white;
@@ -274,13 +272,14 @@ body {
         margin-top: 0.75rem;
     }
 
-    .pdf-container {
+    .image-container {
         padding: 1rem;
+        min-height: 400px;
     }
 
-    .pdf-viewer {
-        height: 70vh;
-        min-height: 400px;
+    .rfq-image {
+        max-width: 100%;
+        padding: 0.5rem;
     }
 
     .contact-footer {
@@ -302,17 +301,9 @@ body {
         font-size: 1rem;
     }
 
-    .pdf-container {
+    .image-container {
         padding: 0.5rem;
-    }
-
-    .pdf-viewer {
-        height: 60vh;
         min-height: 300px;
-    }
-
-    .rfq-image {
-        padding: 0.5rem;
     }
 
     .download-link {
@@ -346,20 +337,16 @@ body {
                 <a href="https://drive.google.com/file/d/1g8vz47mczDI6SjM8FHDqd1L2gqQDTrm0/view" target="_blank" class="download-link">
                     📄 View/Download Complete RFQ
                 </a>
-                <a href="https://hunden.com/developer-rfq-the-family-entertainment-zone/" target="_blank" class="learn-more-btn">
-                    � Learn More
-                </a>
             </div>
         </div>
         
-        <div class="pdf-container">
-            <iframe src="https://drive.google.com/file/d/1g8vz47mczDI6SjM8FHDqd1L2gqQDTrm0/preview" 
-                    class="pdf-viewer"
-                    title="FEZ RFQ Document - September 2025 Draft"
-                    loading="lazy"
-                    allow="autoplay">
-                <p>Your browser does not support PDF viewing. Please <a href="https://drive.google.com/file/d/1g8vz47mczDI6SjM8FHDqd1L2gqQDTrm0/view" target="_blank">view the PDF on Google Drive</a>.</p>
-            </iframe>
+        <div class="image-container">
+            <a href="https://hunden.com/developer-rfq-the-family-entertainment-zone/" target="_blank" class="rfq-image-link">
+                <img src="ICSC Western RFQ QR Display.jpg" 
+                     alt="FEZ RFQ QR Display - ICSC Western" 
+                     class="rfq-image"
+                     loading="lazy">
+            </a>
         </div>
 
         <div class="contact-footer">
@@ -385,31 +372,9 @@ body {
             });
         });
 
-        // PDF viewer is now streamlined without fullscreen functionality
-
-        // Handle PDF loading errors
-        document.addEventListener('DOMContentLoaded', function() {
-            const iframe = document.querySelector('.pdf-viewer');
-            iframe.addEventListener('load', function() {
-                // PDF loaded successfully
-                console.log('PDF loaded successfully');
-            });
-            
-            iframe.addEventListener('error', function() {
-                // PDF failed to load, show Google Drive link instead
-                const container = iframe.parentElement;
-                container.innerHTML = `
-                    <div style="text-align: center; padding: 3rem; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <h3 style="color: #b93d3d; margin-bottom: 1rem;">PDF Preview Not Available</h3>
-                        <p style="margin-bottom: 2rem; color: #666;">Unable to display the PDF preview. Please view the document directly on Google Drive.</p>
-                        <a href="https://drive.google.com/file/d/1g8vz47mczDI6SjM8FHDqd1L2gqQDTrm0/view" target="_blank" class="download-link" style="display: inline-block; background: #b93d3d; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 6px;">
-                            📄 View Complete RFQ on Google Drive
-                        </a>
-                    </div>
-                `;
-            });
-        });
+        // RFQ image display with click-to-learn-more functionality
     </script>
 </body>
 </html>
+
 
