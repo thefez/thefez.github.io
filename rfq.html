@@ -81,9 +81,9 @@ body {
 }
 
 /* =====================
-   IMAGE DISPLAY STYLES
+   PDF DISPLAY STYLES
 ===================== */
-.image-display {
+.pdf-display {
     background-color: #f5f5f5;
     min-height: calc(100vh - 60px);
     display: flex;
@@ -113,33 +113,58 @@ body {
     font-weight: 500;
 }
 
-.image-container {
+.pdf-header {
+    background-color: white;
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.pdf-notice {
+    color: #666;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+.pdf-container {
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding: 2rem;
-    min-height: 600px;
-}
-
-.rfq-image {
-    max-width: 800px;
-    max-height: 80vh;
-    width: auto;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    background: white;
+    align-items: center;
     padding: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f8f9fa;
 }
 
-.rfq-image:hover {
-    transform: scale(1.02);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+.pdf-viewer {
+    width: 100%;
+    max-width: 1000px;
+    height: 80vh;
+    min-height: 600px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: white;
 }
 
-.image-footer {
+.fullscreen-btn {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-left: 1rem;
+}
+
+.fullscreen-btn:hover {
+    background-color: #555;
+}
+
+.pdf-footer {
     background-color: white;
     padding: 1.5rem 2rem;
     border-top: 1px solid #ddd;
@@ -231,19 +256,28 @@ body {
         font-size: 1.8rem;
     }
 
-    .image-header {
+    .pdf-header {
         padding: 1rem;
     }
 
-    .image-container {
+    .pdf-container {
         padding: 1rem;
+    }
+
+    .pdf-viewer {
+        height: 70vh;
         min-height: 400px;
     }
 
-    .image-footer {
+    .pdf-footer {
         flex-direction: column;
         text-align: center;
         padding: 1rem;
+    }
+
+    .fullscreen-btn {
+        margin-left: 0;
+        margin-top: 0.5rem;
     }
 
     .contact-info {
@@ -257,12 +291,16 @@ body {
         font-size: 1.4rem;
     }
 
-    .launch-notice {
+    .pdf-notice {
         font-size: 1rem;
     }
 
-    .image-container {
+    .pdf-container {
         padding: 0.5rem;
+    }
+
+    .pdf-viewer {
+        height: 60vh;
         min-height: 300px;
     }
 
@@ -290,29 +328,35 @@ body {
         </nav>
     </header>
 
-    <!-- Main Content - Image Display -->
-    <main class="image-display">
-        <div class="image-header">
-          
+    <!-- Main Content - PDF Display -->
+    <main class="pdf-display">
+        <div class="pdf-header">
+            <h1 class="page-title">Request for Qualifications</h1>
+            <p class="pdf-notice">View the complete RFQ document below or download the PDF for offline access.</p>
         </div>
         
-        <div class="image-container">
-            <img src="img/rfq-display.png" 
-                 alt="FEZ RFQ Display - ICSC Western" 
-                 class="rfq-image"
-                 loading="lazy">
+        <div class="pdf-container">
+            <iframe src="FEZ_Sep2025_RFQ-DRAFT.pdf" 
+                    class="pdf-viewer"
+                    title="FEZ RFQ Document - September 2025 Draft"
+                    loading="lazy">
+                <p>Your browser does not support PDF viewing. Please <a href="FEZ_Sep2025_RFQ-DRAFT.pdf" download>download the PDF</a> to view it.</p>
+            </iframe>
         </div>
 
-        <div class="image-footer">
+        <div class="pdf-footer">
             <div class="contact-info">
                 <strong>Joseph Viorge-Koide</strong> | Economic Development Analyst | 
                 <a href="tel:209-456-8014">209-456-8014</a> | 
                 <a href="https://manteca.gov" target="_blank">Manteca.gov</a>
             </div>
             <div class="download-links">
-                <a href="ICSC Western RFQ QR Display.pdf" target="_blank" class="download-link">
-                    📄 Download PDF Version
+                <a href="FEZ_Sep2025_RFQ-DRAFT.pdf" download class="download-link">
+                    📄 Download Complete RFQ (65 pages)
                 </a>
+                <button onclick="openFullscreen()" class="fullscreen-btn">
+                    🔍 View Fullscreen
+                </button>
             </div>
         </div>
     </main>
@@ -328,6 +372,41 @@ body {
             link.addEventListener('click', () => {
                 const navMenu = document.getElementById('navMenu');
                 navMenu.classList.remove('mobile-open');
+            });
+        });
+
+        // Fullscreen PDF viewer functionality
+        function openFullscreen() {
+            const iframe = document.querySelector('.pdf-viewer');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) { /* Safari */
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { /* IE11 */
+                iframe.msRequestFullscreen();
+            }
+        }
+
+        // Handle PDF loading errors
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframe = document.querySelector('.pdf-viewer');
+            iframe.addEventListener('load', function() {
+                // PDF loaded successfully
+                console.log('PDF loaded successfully');
+            });
+            
+            iframe.addEventListener('error', function() {
+                // PDF failed to load, show download link instead
+                const container = iframe.parentElement;
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <h3 style="color: #b93d3d; margin-bottom: 1rem;">PDF Preview Not Available</h3>
+                        <p style="margin-bottom: 2rem; color: #666;">Unable to display the PDF in your browser. Please download the document to view it.</p>
+                        <a href="FEZ_Sep2025_RFQ-DRAFT.pdf" download class="download-link" style="display: inline-block; background: #b93d3d; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 6px;">
+                            📄 Download Complete RFQ (65 pages)
+                        </a>
+                    </div>
+                `;
             });
         });
     </script>
